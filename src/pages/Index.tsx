@@ -149,27 +149,14 @@ const heroCovers = [
 
 function Hero() {
   const [active, setActive] = useState(0);
-  const [animating, setAnimating] = useState(false);
 
+  // Auto-advance — no animating state, no setTimeout churn
   useEffect(() => {
     const timer = setInterval(() => {
-      setAnimating(true);
-      setTimeout(() => {
-        setActive((prev) => (prev + 1) % heroCovers.length);
-        setAnimating(false);
-      }, 300);
-    }, 3500);
+      setActive((prev) => (prev + 1) % heroCovers.length);
+    }, 4000);
     return () => clearInterval(timer);
   }, []);
-
-  const goTo = (index: number) => {
-    if (index === active) return;
-    setAnimating(true);
-    setTimeout(() => {
-      setActive(index);
-      setAnimating(false);
-    }, 300);
-  };
 
   return (
     <section
@@ -177,7 +164,7 @@ function Hero() {
       className="relative overflow-hidden pt-16 md:pt-24 pb-0 px-4 sm:px-6"
       style={{ background: "linear-gradient(160deg, hsl(var(--brand-cream)) 0%, hsl(0 0% 100%) 55%)" }}
     >
-      {/* Decorative wave blobs */}
+      {/* Decorative blobs — pointer-events-none so they never shift layout */}
       <div
         className="absolute -top-32 -right-32 w-96 h-96 rounded-full opacity-10 blur-3xl pointer-events-none"
         style={{ background: "hsl(var(--brand-teal))" }}
@@ -187,9 +174,11 @@ function Hero() {
         style={{ background: "hsl(var(--brand-amber))" }}
       />
 
+      {/* Grid: copy left, slideshow right */}
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center pb-12 md:pb-16">
-        {/* Left: copy */}
-        <div className="space-y-6 relative z-10">
+
+        {/* ── Left: copy (no z-index fighting, stable position) ─────────────── */}
+        <div className="space-y-6">
           <div>
             <span
               className="inline-block text-xs font-bold uppercase tracking-widest mb-3 px-3 py-1 rounded-full"
@@ -239,24 +228,36 @@ function Hero() {
           </div>
         </div>
 
-        {/* Right: animated cover slideshow */}
-        <div className="flex flex-col items-center md:items-end gap-4 relative z-10">
-          <div className="relative w-full max-w-sm md:max-w-md">
-            <img
-              key={active}
-              src={heroCovers[active].src}
-              alt={heroCovers[active].alt}
-              className="w-full rounded-2xl shadow-2xl object-cover transition-all duration-300"
-              style={{
-                opacity: animating ? 0 : 1,
-                transform: animating ? "scale(0.97) translateY(6px)" : "scale(1) translateY(0)",
-                transition: "opacity 0.3s ease, transform 0.3s ease",
-              }}
-            />
-            {/* Book label badge */}
+        {/* ── Right: CSS crossfade slideshow ────────────────────────────────── */}
+        <div className="flex flex-col items-center md:items-end gap-4">
+          {/*
+            All images are stacked absolutely inside a fixed aspect-ratio wrapper.
+            Only the active one has opacity-1; the rest are opacity-0.
+            Pure CSS transition — no key churn, no setTimeout, no flicker.
+          */}
+          <div className="relative w-full max-w-sm md:max-w-md" style={{ aspectRatio: "4/3" }}>
+            {heroCovers.map((cover, i) => (
+              <img
+                key={cover.label}
+                src={cover.src}
+                alt={cover.alt}
+                className="absolute inset-0 w-full h-full object-cover rounded-2xl shadow-2xl"
+                style={{
+                  opacity: i === active ? 1 : 0,
+                  transition: "opacity 0.7s ease-in-out",
+                  willChange: "opacity",
+                }}
+              />
+            ))}
+            {/* Book label badge — driven by state, not by an image reorder */}
             <div
-              className="absolute bottom-3 left-3 px-3 py-1 rounded-full text-xs font-bold shadow-lg"
-              style={{ background: "hsl(var(--brand-navy))", color: "hsl(0 0% 100%)", fontFamily: "Nunito, sans-serif" }}
+              className="absolute bottom-3 left-3 px-3 py-1 rounded-full text-xs font-bold shadow-lg z-10"
+              style={{
+                background: "hsl(var(--brand-navy))",
+                color: "hsl(0 0% 100%)",
+                fontFamily: "Nunito, sans-serif",
+                transition: "opacity 0.3s ease",
+              }}
             >
               {heroCovers[active].label}
             </div>
@@ -264,16 +265,18 @@ function Hero() {
 
           {/* Dot indicators */}
           <div className="flex gap-2 mt-1">
-            {heroCovers.map((_, i) => (
+            {heroCovers.map((cover, i) => (
               <button
-                key={i}
-                onClick={() => goTo(i)}
-                aria-label={`Show ${heroCovers[i].label} cover`}
-                className="transition-all duration-300 rounded-full"
+                key={cover.label}
+                onClick={() => setActive(i)}
+                aria-label={`Show ${cover.label} cover`}
+                className="rounded-full transition-all duration-500"
                 style={{
                   width: i === active ? "28px" : "10px",
                   height: "10px",
-                  background: i === active ? "hsl(var(--brand-teal))" : "hsl(var(--brand-teal) / 0.3)",
+                  background: i === active
+                    ? "hsl(var(--brand-teal))"
+                    : "hsl(var(--brand-teal) / 0.3)",
                 }}
               />
             ))}
