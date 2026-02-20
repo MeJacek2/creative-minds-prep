@@ -1,192 +1,161 @@
 
-# Creative Minds – Full Landing Page Build Plan
+# Copy Update — Creative Minds Landing Page
 
-## Overview
+## What This Changes
 
-This plan covers building the complete single-page landing website for Creative Minds FS2 School Readiness workbooks, from the ground up. The current `Index.tsx` is a blank placeholder — every section will be built fresh.
+Replace all placeholder and draft copy across `src/pages/Index.tsx` with the approved final website copy provided. No structural changes, no new sections — purely a text/copy update throughout the existing 11 sections.
 
 ---
 
-## Uploaded Images — Usage Plan
+## Section-by-Section Copy Changes
 
-| Image | Usage |
+### Hero (lines ~142–169)
+
+**Subheadline** — replace current combined subheadline with the two-part approved copy:
+- Line 1: *"Build confidence at home with structured FS2 practice designed by Early Years experts."*
+- Supporting text (new `<p>` below): *"Creative Minds School Readiness Pack helps children strengthen phonics, number skills, and real-world understanding — in just 15–20 minutes a day."*
+
+**CTA 1 button label** — change to: *"Order the FS2 Pack on WhatsApp"*
+**CTA 2 button label** — stays: *"View Inside Pages"* ✓ (already correct)
+
+---
+
+### Problem Section (lines ~205–260)
+
+**Problem cards — titles only** (descriptions below are editorial additions that reinforce the brand, will be kept as-is since copy doc only provides bullet titles):
+
+| Current | Approved |
 |---|---|
-| `3-front-covers.png` | Hero section product visual — all 3 books shown together |
-| `Screen_Shot_2026-02-20_at_11.50.02_PM.png` | Understanding the World individual book card |
-| `literacy-fullbook.png` | Interior page previews for the Literacy book card |
-| `maths-full-book.png` | Interior page previews for the Maths book card |
+| "Weak phonics foundation" | "Phonics foundations are inconsistent" |
+| "Inconsistent number writing" | "Number writing lacks confidence" |
+| "Lack of structured home practice" | "Practice at home is unstructured" |
+| "Over-reliance on screens" | "Learning feels rushed or stressful" |
 
-All 4 images will be copied into `src/assets/` and imported properly as ES6 modules.
-
----
-
-## Brand Color System (from book covers)
-
-Extracted directly from the cover artwork:
-
-| Token | Color | Use |
-|---|---|---|
-| `--brand-teal` | `186 100% 38%` (deep turquoise) | Primary CTA buttons, headings |
-| `--brand-pink` | `330 80% 55%` (magenta-pink, the "Creative" script color) | Accent highlights, badges |
-| `--brand-amber` | `38 95% 55%` (warm gold, the wave base) | Section backgrounds, warm accents |
-| `--brand-navy` | `220 60% 18%` (the "Minds" text color) | Body text, dark headings |
-| `--brand-cream` | `45 60% 97%` (near-white warm) | Section backgrounds |
-
-Typography will use **Google Fonts** loaded via `index.html`:
-- **Nunito** — rounded, friendly, premium feel for headings
-- **Inter** — clean body text
+**Closing paragraph** — replace with:
+*"Early years learning should feel calm, progressive, and encouraging."*
 
 ---
 
-## File Changes
+### Books Section (lines ~263–357)
 
-### 1. `index.html`
-- Update page title to "Creative Minds – FS2 School Readiness Workbooks"
-- Update meta description and OG tags
-- Add Google Fonts link for Nunito + Inter
+**Section subheading** — replace `"40 structured pages per book · Premium 100gsm print"` with:
+*"Three structured workbooks designed to gently build confidence at home."*
 
-### 2. `src/index.css`
-- Define new CSS custom properties using brand palette above
-- Override `--primary` to brand teal
-- Override `--background` to warm cream
-- Override `--foreground` to brand navy
-- Add custom font-family references
+**Book descriptions and topic lists:**
 
-### 3. `src/App.css`
-- Remove all default Vite boilerplate styles (logo, spin animations, etc.)
+**Literacy:**
+- Description: *"A strong foundation for confident reading."*
+- Topics: Phoneme recognition · Blending two & three-letter words · Digraphs & sight words · Early reading comprehension · Synthetic phonics progression
 
-### 4. Assets — copy 4 images to `src/assets/`
-- `src/assets/covers-all-three.png`
-- `src/assets/cover-understanding-world.png`
-- `src/assets/book-literacy-preview.png`
-- `src/assets/book-maths-preview.png`
+**Maths:**
+- Description: *"Clear progression that builds number confidence step by step."*
+- Topics: Writing numbers from 1–100 · Place value (tens & ones) · Number lines · Addition & subtraction basics · Patterns & time concepts
 
-### 5. `src/pages/Index.tsx` — Full landing page
-
-The page is built as a single scrollable component with these clearly separated sections:
+**Understanding the World:**
+- Description: *"Helping children explore and understand the world around them."*
+- Topics: All About Me · Community Helpers · Transportation · Fruits & Vegetables · Everyday themes
 
 ---
 
-## Landing Page Section Architecture
+### Trust Section (lines ~360–414)
 
-**Section 1 — Sticky Navigation Header**
-- Logo text: "Creative Minds" styled with brand colors
-- Scroll links: About · Books · Pricing · FAQ
-- Sticky WhatsApp order button (teal, visible on desktop)
-- Mobile: hamburger menu
+**Subheadline** — replace *"Not a print-and-sell worksheet pack. A carefully structured system."* with:
+*"Designed by Early Years professionals with real classroom experience."*
 
-**Section 2 — Hero**
-- Left: Headline + subheadline + 2 CTAs
-- Right: `covers-all-three.png` displayed as a clean product shot
-- Headline: *"Is Your Child Ready for Year 1?"*
-- Subheadline: *"Build confidence at home with structured FS2 practice designed by early years experts."*
-- CTA 1 (teal, filled): "Order on WhatsApp" → WhatsApp deep link
-- CTA 2 (outline): "View Inside Pages" → scrolls to books section
-- Tag below CTAs: "Cash on Delivery · UAE-Wide Delivery"
-- Brand tagline strip below hero: *"Confidence Starts Early."*
+**Trust bullets** — replace current 6 with the approved 7:
+1. Designed by an EYFS Centre Manager
+2. Structured progression across 40 pages per book
+3. Engaging, child-friendly illustrations
+4. Premium 100gsm paper & laminated cover
+5. Suitable for British Curriculum FS2
+6. Suitable for CBSE KG2 learners
+7. Made in UAE
 
-**Section 3 — Problem (warm cream background)**
-- Headline: *"Many FS2 children struggle because..."*
-- 4 icon + text bullet cards:
-  - Weak phonics foundation
-  - Inconsistent number writing
-  - Lack of structured home practice
-  - Over-reliance on screens
-- Short empathetic paragraph below
-
-**Section 4 — Product Showcase (white background)**
-- Headline: *"A Complete FS2 School Readiness Pack"*
-- 3 book cards side by side (or stacked on mobile):
-  - Each card: cover image + subject name + colored badge + bullet list of topics
-  - Literacy (brown badge): Phonemes, Blending, Digraphs, Sight words, Comprehension
-  - Maths (red badge): Numbers 1–100, Addition & subtraction, Number lines, Patterns, Time
-  - Understanding the World (green badge): Community helpers, Transportation, Everyday life, Thematic learning
-- "40 structured pages per book · Premium 100gsm print"
-
-**Section 5 — Why Trust Creative Minds (teal background, white text)**
-- Headline: *"Designed by Early Years Professionals"*
-- Author credential: Dr. Hemlata Wadhwani, EYFS Centre Manager
-- 6 trust bullets with checkmark icons:
-  - Progression-based learning
-  - 40 structured pages per book
-  - Premium 100gsm print quality
-  - Made in UAE
-  - EYFS and CBSE aligned
-  - No random worksheets
-
-**Section 6 — How to Use It (cream background)**
-- Headline: *"Just 15–20 Minutes a Day"*
-- 4 simple numbered steps:
-  1. Choose one book
-  2. Complete 2–3 pages
-  3. Practice regularly
-  4. Build confidence naturally
-- Reassurance note: "No pressure. No overwhelm. Just gentle, consistent progress."
-
-**Section 7 — Pricing (white background)**
-- Two pricing cards:
-  - Single Book — AED 35 (outline card)
-  - Full Pack (3 Books) — AED 90 (highlighted card, "Best Value" badge)
-- Under both: "Cash on Delivery Available · UAE-Wide Delivery"
-- Primary CTA: "Order on WhatsApp"
-
-**Section 8 — Testimonials (cream background)**
-- Placeholder section: styled with "⭐⭐⭐⭐⭐" stars
-- 2 placeholder quote cards with dummy text (to be replaced with real testimonials)
-- Note: Component designed to be easily swappable
-
-**Section 9 — FAQ (white background)**
-- Using the existing Accordion UI component
-- 5 FAQs:
-  1. Is this aligned to the British curriculum?
-  2. Is it suitable for CBSE KG2 children?
-  3. Is this too academic for young children?
-  4. Is it digital or printed?
-  5. How do I place an order?
-
-**Section 10 — Final CTA (teal gradient background)**
-- Headline: *"Give Your Child Confidence Before Year 1"*
-- Large WhatsApp order button (white, filled)
-- Reassurance line: "Cash on Delivery · UAE-Wide Delivery · Premium Printed Workbooks"
-
-**Section 11 — Footer**
-- Logo + tagline
-- Copyright
-- Instagram link placeholder
-- WhatsApp contact link
+**Closing note** (add after trust bullets grid):
+*"No random worksheets. No overwhelming content. Just calm, clear learning."*
 
 ---
 
-## WhatsApp Integration
+### How to Use Section (lines ~417–473)
 
-The WhatsApp deep link will prefill the message:
-```
-https://wa.me/971XXXXXXXXX?text=Hi%2C%20I%20would%20like%20to%20order%20the%20FS2%20School%20Readiness%20Pack.
-```
+**Step labels** — keep same 4 steps ✓ (copy matches approved)
 
-A placeholder number (`971500000000`) will be used — the user can easily replace it with the actual number in one place (a constant at the top of `Index.tsx`).
-
----
-
-## Technical Notes
-
-- No database, no backend — pure static React
-- All images imported as ES6 modules from `src/assets/`
-- Fully mobile-responsive using Tailwind breakpoints (`sm:`, `md:`, `lg:`)
-- Smooth scroll behaviour via CSS `scroll-behavior: smooth`
-- The Accordion component from `src/components/ui/accordion.tsx` is used for FAQ
-- WhatsApp number is defined as a single constant for easy replacement
-- Google Fonts loaded via `<link>` in `index.html` for performance
+**Closing strip text** — replace:
+*"No pressure. No overwhelm. Just gentle, consistent progress."*
+→ *"Short sessions. Clear structure. Real progress."*
 
 ---
 
-## Summary of Files Modified/Created
+### New Section — "What Makes It Different?" (insert between HowToUse and Pricing)
 
-1. `index.html` — title, meta, Google Fonts
-2. `src/index.css` — brand color system + typography
-3. `src/App.css` — remove boilerplate
-4. `src/assets/covers-all-three.png` — copied from upload
-5. `src/assets/cover-understanding-world.png` — copied from upload
-6. `src/assets/book-literacy-preview.png` — copied from upload
-7. `src/assets/book-maths-preview.png` — copied from upload
-8. `src/pages/Index.tsx` — full landing page (all 11 sections)
+The approved copy includes a new **Section 6 – What Makes It Different?** that doesn't exist yet:
+
+**Headline:** *"Unlike generic activity books:"*
+
+**Bullets:**
+- Every page follows logical progression
+- Skills build gradually
+- Designed by real Early Years professionals
+- Created specifically for Foundation Stage learners
+
+**Closing:** *"This is not extra homework. It is structured reinforcement."*
+
+This will be added as a new `WhyDifferent` component on a white background, inserted between `<HowToUse />` and `<Pricing />` in the page assembly.
+
+---
+
+### Pricing Section (lines ~476–583)
+
+**Section headline** — replace *"Simple, Honest Pricing"* with nothing special (it's unlabelled in copy). Keep as-is or update to match tone — will keep existing headline as it's clean and unspecified.
+
+**Bundle card description** — replace:
+*"All three workbooks. Complete FS2 school readiness at home."*
+→ *"Best value for structured progression across all areas."*
+
+**Footer note under pricing** — update to exactly:
+*"✔ Cash on Delivery Available · ✔ UAE-wide delivery"*
+
+---
+
+### FAQ Section (lines ~652–713)
+
+Replace all 5 FAQ answers with the approved shorter, cleaner versions:
+
+**Q1:** Is this aligned with British curriculum?
+**A:** *"Yes. The workbooks follow EYFS learning progression and are ideal for FS2 learners."*
+
+**Q2:** Is it suitable for CBSE KG2 children?
+**A:** *"Yes. The foundational phonics and number skills align with KG2 expectations."*
+
+**Q3:** Is this too academic?
+**A:** *"No. The structure is gentle and child-friendly, designed to build confidence without pressure."*
+
+**Q4:** Is this digital or printed?
+**A:** *"These are premium printed A4 workbooks with 100gsm pages and laminated covers."*
+
+**Q5:** How do I place an order? (keep existing — matches approved copy)
+
+---
+
+### Final CTA Section (lines ~717–751)
+
+**Tagline above headline** — add: *"Confidence Starts Early."* (as a styled line above the main h2)
+
+**Supporting paragraph** — replace:
+*"Structured. Calm. Expert-designed. Ready to use today."*
+→ *"Give your child a calm, structured foundation before Year 1."*
+
+**Button label** — change to: *"Order the FS2 Pack Today"*
+
+---
+
+## Technical Approach
+
+- All changes are to text strings and data arrays in `src/pages/Index.tsx` only
+- No new dependencies, no routing changes, no CSS changes needed
+- The new `WhyDifferent` section is a simple inline component added to the same file
+- All other files remain untouched
+
+## Files Modified
+
+1. `src/pages/Index.tsx` — copy updates across all 11 sections + one new `WhyDifferent` component
