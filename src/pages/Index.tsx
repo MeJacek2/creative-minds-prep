@@ -11,11 +11,18 @@ import {
 } from "@/components/ui/accordion";
 
 import coverUnderstandingWorld from "@/assets/cover-understanding-world.png";
-import bookLiteracyPreview from "@/assets/book-literacy-preview.png";
-import bookMathsPreview from "@/assets/book-maths-preview.png";
 import coverLiteracy from "@/assets/cover-literacy.png";
 import coverMaths from "@/assets/cover-maths.png";
 import coverUow from "@/assets/cover-uow.png";
+
+import literacy1 from "@/assets/literacy-1.png";
+import literacy2 from "@/assets/literacy-2.png";
+import literacy3 from "@/assets/literacy-3.png";
+import literacy4 from "@/assets/literacy-4.png";
+import maths1 from "@/assets/maths-1.png";
+import maths2 from "@/assets/maths-2.png";
+import maths3 from "@/assets/maths-3.png";
+import maths4 from "@/assets/maths-4.png";
 
 // ── Change this to the real WhatsApp number ──────────────────────────────────
 const WHATSAPP_NUMBER = "971500000000";
@@ -406,7 +413,7 @@ function Problem() {
 const books = [
   {
     title: "Literacy",
-    image: bookLiteracyPreview,
+    images: [literacy1, literacy2, literacy3, literacy4],
     badgeColor: "hsl(27 60% 40%)",
     badgeBg: "hsl(27 60% 40% / 0.12)",
     topics: ["Phoneme recognition", "Blending two & three-letter words", "Digraphs & sight words", "Early reading comprehension", "Synthetic phonics progression"],
@@ -414,7 +421,7 @@ const books = [
   },
   {
     title: "Maths",
-    image: bookMathsPreview,
+    images: [maths1, maths2, maths3, maths4],
     badgeColor: "hsl(0 75% 45%)",
     badgeBg: "hsl(0 75% 45% / 0.10)",
     topics: ["Writing numbers from 1–100", "Place value (tens & ones)", "Number lines", "Addition & subtraction basics", "Patterns & time concepts"],
@@ -422,13 +429,73 @@ const books = [
   },
   {
     title: "Understanding the World",
-    image: coverUnderstandingWorld,
+    images: [coverUnderstandingWorld],
     badgeColor: "hsl(142 60% 35%)",
     badgeBg: "hsl(142 60% 35% / 0.10)",
     topics: ["All About Me", "Community Helpers", "Transportation", "Fruits & Vegetables", "Everyday themes"],
     description: "Helping children explore and understand the world around them.",
   },
 ];
+
+// ── Per-card sliding image slideshow ──────────────────────────────────────────
+function BookImageSlideshow({ images, title, badgeColor }: { images: string[]; title: string; badgeColor: string }) {
+  const [active, setActive] = useState(0);
+
+  useEffect(() => {
+    if (images.length <= 1) return;
+    const timer = setInterval(() => {
+      setActive((prev) => (prev + 1) % images.length);
+    }, 2800);
+    return () => clearInterval(timer);
+  }, [images.length]);
+
+  return (
+    <div className="relative w-full overflow-hidden bg-gray-50" style={{ aspectRatio: "4/3" }}>
+      {/* Sliding track */}
+      <div
+        className="flex h-full"
+        style={{
+          width: `${images.length * 100}%`,
+          transform: `translateX(calc(-${active * 100}% / ${images.length}))`,
+          transition: "transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+        }}
+      >
+        {images.map((src, i) => (
+          <div
+            key={i}
+            className="relative h-full flex-shrink-0"
+            style={{ width: `${100 / images.length}%` }}
+          >
+            <img
+              src={src}
+              alt={`${title} workbook page ${i + 1}`}
+              className="w-full h-full object-cover object-top"
+            />
+          </div>
+        ))}
+      </div>
+
+      {/* Dot indicators */}
+      {images.length > 1 && (
+        <div className="absolute bottom-2 left-0 right-0 flex justify-center gap-1.5">
+          {images.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setActive(i)}
+              aria-label={`Go to page ${i + 1}`}
+              className="rounded-full transition-all duration-300"
+              style={{
+                width: i === active ? "18px" : "6px",
+                height: "6px",
+                background: i === active ? badgeColor : "rgba(255,255,255,0.7)",
+              }}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
 
 function Books() {
   return (
@@ -456,13 +523,11 @@ function Books() {
               key={book.title}
               className="overflow-hidden border shadow-md hover:shadow-xl transition-shadow duration-300"
             >
-              <div className="aspect-[4/3] overflow-hidden bg-gray-50">
-                <img
-                  src={book.image}
-                  alt={`Creative Minds ${book.title} workbook interior pages`}
-                  className="w-full h-full object-cover object-top"
-                />
-              </div>
+              <BookImageSlideshow
+                images={book.images}
+                title={book.title}
+                badgeColor={book.badgeColor}
+              />
               <CardContent className="p-5 space-y-3">
                 <div className="flex items-center justify-between">
                   <h3
