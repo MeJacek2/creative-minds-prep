@@ -201,7 +201,7 @@ function Hero() {
     <section
       id="hero"
       className="relative overflow-hidden pt-16 md:pt-24 pb-0 px-4 sm:px-6"
-      style={{ background: "linear-gradient(145deg, hsl(var(--brand-cream)) 0%, hsl(38 80% 96%) 40%, hsl(175 60% 96%) 100%)" }}
+      style={{ background: "linear-gradient(145deg, hsl(38 70% 95%) 0%, hsl(var(--brand-cream)) 40%, hsl(175 55% 94%) 100%)" }}
     >
       {/* ── Abstract SVG pattern layer ─────────────────────────────────── */}
       <svg
@@ -211,39 +211,42 @@ function Hero() {
         preserveAspectRatio="xMidYMid slice"
       >
         <defs>
-          <pattern id="hero-dots" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
-            <circle cx="2" cy="2" r="1.5" fill="hsl(var(--brand-teal))" opacity="0.12" />
-            <circle cx="32" cy="32" r="1" fill="hsl(var(--brand-pink))" opacity="0.10" />
-            <circle cx="58" cy="10" r="1.2" fill="hsl(var(--brand-amber))" opacity="0.10" />
+          <pattern id="hero-dots" x="0" y="0" width="52" height="52" patternUnits="userSpaceOnUse">
+            <circle cx="2" cy="2" r="2" fill="hsl(var(--brand-teal))" opacity="0.22" />
+            <circle cx="28" cy="28" r="1.5" fill="hsl(var(--brand-pink))" opacity="0.18" />
+            <circle cx="50" cy="8" r="1.8" fill="hsl(var(--brand-amber))" opacity="0.20" />
           </pattern>
         </defs>
         <rect width="100%" height="100%" fill="url(#hero-dots)" />
 
-        {/* Soft floating rings */}
-        <circle cx="88%" cy="12%" r="120" fill="none" stroke="hsl(var(--brand-teal))" strokeWidth="1.5" opacity="0.08" />
-        <circle cx="88%" cy="12%" r="80" fill="none" stroke="hsl(var(--brand-teal))" strokeWidth="1" opacity="0.07" />
-        <circle cx="8%" cy="80%" r="90" fill="none" stroke="hsl(var(--brand-pink))" strokeWidth="1.5" opacity="0.07" />
-        <circle cx="8%" cy="80%" r="55" fill="none" stroke="hsl(var(--brand-pink))" strokeWidth="1" opacity="0.06" />
-        <circle cx="50%" cy="95%" r="140" fill="none" stroke="hsl(var(--brand-amber))" strokeWidth="1" opacity="0.06" />
+        {/* Floating rings — more visible */}
+        <circle cx="88%" cy="12%" r="130" fill="none" stroke="hsl(var(--brand-teal))" strokeWidth="2" opacity="0.18" />
+        <circle cx="88%" cy="12%" r="85"  fill="none" stroke="hsl(var(--brand-teal))" strokeWidth="1.5" opacity="0.14" />
+        <circle cx="8%"  cy="78%" r="100" fill="none" stroke="hsl(var(--brand-pink))" strokeWidth="2" opacity="0.16" />
+        <circle cx="8%"  cy="78%" r="60"  fill="none" stroke="hsl(var(--brand-pink))" strokeWidth="1.5" opacity="0.12" />
+        <circle cx="50%" cy="98%" r="160" fill="none" stroke="hsl(var(--brand-amber))" strokeWidth="1.5" opacity="0.12" />
+        <circle cx="35%" cy="10%" r="60"  fill="none" stroke="hsl(var(--brand-amber))" strokeWidth="1" opacity="0.10" />
 
-        {/* Scattered soft shapes */}
-        <rect x="75%" y="55%" width="28" height="28" rx="6" fill="hsl(var(--brand-amber))" opacity="0.06" transform="rotate(20,0,0)" />
-        <rect x="15%" y="18%" width="20" height="20" rx="5" fill="hsl(var(--brand-teal))" opacity="0.07" transform="rotate(-15,0,0)" />
-        <circle cx="62%" cy="22%" r="18" fill="hsl(var(--brand-pink))" opacity="0.06" />
-        <circle cx="30%" cy="72%" r="12" fill="hsl(var(--brand-teal))" opacity="0.06" />
+        {/* Scattered filled shapes — more opaque */}
+        <rect x="76%" y="54%" width="32" height="32" rx="8" fill="hsl(var(--brand-amber))" opacity="0.12" transform="rotate(22,0,0)" />
+        <rect x="14%" y="16%" width="24" height="24" rx="6" fill="hsl(var(--brand-teal))"  opacity="0.13" transform="rotate(-18,0,0)" />
+        <circle cx="63%" cy="20%" r="22" fill="hsl(var(--brand-pink))"  opacity="0.10" />
+        <circle cx="29%" cy="70%" r="15" fill="hsl(var(--brand-teal))"  opacity="0.10" />
+        <circle cx="72%" cy="75%" r="10" fill="hsl(var(--brand-amber))" opacity="0.12" />
+        <rect x="55%" y="82%" width="18" height="18" rx="4" fill="hsl(var(--brand-pink))" opacity="0.09" transform="rotate(10,0,0)" />
       </svg>
 
-      {/* Decorative blobs — more vivid */}
+      {/* Decorative blobs */}
       <div
-        className="absolute -top-24 -right-24 w-[420px] h-[420px] rounded-full opacity-[0.13] blur-3xl pointer-events-none"
+        className="absolute -top-20 -right-20 w-[460px] h-[460px] rounded-full opacity-[0.20] blur-3xl pointer-events-none"
         style={{ background: "hsl(var(--brand-teal))" }}
       />
       <div
-        className="absolute top-16 -left-16 w-72 h-72 rounded-full opacity-[0.13] blur-3xl pointer-events-none"
+        className="absolute top-12 -left-12 w-80 h-80 rounded-full opacity-[0.18] blur-3xl pointer-events-none"
         style={{ background: "hsl(var(--brand-amber))" }}
       />
       <div
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[500px] h-40 rounded-full opacity-[0.08] blur-3xl pointer-events-none"
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[520px] h-48 rounded-full opacity-[0.14] blur-3xl pointer-events-none"
         style={{ background: "hsl(var(--brand-pink))" }}
       />
 
@@ -262,15 +265,15 @@ function Hero() {
               className="text-4xl md:text-5xl font-black leading-tight"
               style={{ fontFamily: "Nunito, sans-serif", color: "hsl(var(--brand-navy))" }}
             >
-              Is Your Child Ready{" "}
-              <span style={{ color: "hsl(var(--brand-teal))" }}>for Year 1?</span>
+              Give Your FS2 Child the Confidence They Need{" "}
+              <span style={{ color: "hsl(var(--brand-teal))" }}>for Year 1</span>
             </h1>
           </div>
           <p className="text-lg text-muted-foreground leading-relaxed max-w-md">
-            Build confidence at home with structured FS2 practice designed by Early Years experts.
+            Build strong phonics, number skills, and real-world understanding with structured practice designed by Early Years experts.
           </p>
-          <p className="text-base text-muted-foreground leading-relaxed max-w-md">
-            Creative Minds School Readiness Pack helps children strengthen phonics, number skills, and real-world understanding — in just 15–20 minutes a day.
+          <p className="text-base font-medium leading-relaxed max-w-md" style={{ color: "hsl(var(--brand-teal))" }}>
+            Just 15–20 minutes a day. Calm, structured learning at home.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3">
@@ -280,7 +283,7 @@ function Hero() {
                 className="w-full sm:w-auto bg-[hsl(var(--brand-teal))] hover:bg-[hsl(var(--brand-teal-light))] text-white font-bold gap-2 shadow-lg text-base px-6"
               >
                 <MessageCircle className="w-5 h-5" />
-                Order the FS2 Pack on WhatsApp
+                Order the FS2 Pack – AED 90 on WhatsApp
               </Button>
             </a>
             <Button
@@ -290,13 +293,22 @@ function Hero() {
               className="w-full sm:w-auto font-semibold text-base px-6 border-2"
               style={{ borderColor: "hsl(var(--brand-navy))", color: "hsl(var(--brand-navy))" }}
             >
-              View Inside Pages
+              See Sample Pages
             </Button>
           </div>
 
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <Package className="w-4 h-4 flex-shrink-0" style={{ color: "hsl(var(--brand-teal))" }} />
-            <span>Cash on Delivery · UAE-Wide Delivery</span>
+          {/* Trust line */}
+          <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm" style={{ color: "hsl(var(--brand-navy))" }}>
+            {[
+              "Designed by EYFS Professionals",
+              "Suitable for British & CBSE KG2",
+              "Cash on Delivery Available",
+              "UAE-Wide Delivery",
+            ].map((t) => (
+              <span key={t} className="flex items-center gap-1">
+                <span style={{ color: "hsl(var(--brand-teal))" }}>✔</span> {t}
+              </span>
+            ))}
           </div>
         </div>
 
