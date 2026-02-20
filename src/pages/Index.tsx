@@ -284,7 +284,7 @@ function Hero() {
                   <div
                     className="absolute inset-0 flex flex-col justify-end p-4"
                     style={{
-                      background: `linear-gradient(to top, ${c.gradientFrom} 0%, ${c.gradientMid} 45%, transparent 70%)`,
+                      background: `linear-gradient(to top, ${c.gradientFrom} 0%, ${c.gradientMid} 18%, transparent 25%)`,
                     }}
                   >
                     <p
