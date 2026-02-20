@@ -23,6 +23,10 @@ import maths1 from "@/assets/maths-1.png";
 import maths2 from "@/assets/maths-2.png";
 import maths3 from "@/assets/maths-3.png";
 import maths4 from "@/assets/maths-4.png";
+import uow1 from "@/assets/uow-1.png";
+import uow2 from "@/assets/uow-2.png";
+import uow3 from "@/assets/uow-3.png";
+import uow4 from "@/assets/uow-4.png";
 
 // ── Change this to the real WhatsApp number ──────────────────────────────────
 const WHATSAPP_NUMBER = "971500000000";
@@ -429,7 +433,7 @@ const books = [
   },
   {
     title: "Understanding the World",
-    images: [coverUnderstandingWorld],
+    images: [uow1, uow2, uow3, uow4],
     badgeColor: "hsl(142 60% 35%)",
     badgeBg: "hsl(142 60% 35% / 0.10)",
     topics: ["All About Me", "Community Helpers", "Transportation", "Fruits & Vegetables", "Everyday themes"],
@@ -437,7 +441,7 @@ const books = [
   },
 ];
 
-// ── Per-card sliding image slideshow ──────────────────────────────────────────
+// ── Per-card crossfade image slideshow ────────────────────────────────────────
 function BookImageSlideshow({ images, title, badgeColor }: { images: string[]; title: string; badgeColor: string }) {
   const [active, setActive] = useState(0);
 
@@ -450,34 +454,25 @@ function BookImageSlideshow({ images, title, badgeColor }: { images: string[]; t
   }, [images.length]);
 
   return (
-    <div className="relative w-full overflow-hidden bg-gray-50" style={{ aspectRatio: "4/3" }}>
-      {/* Sliding track */}
-      <div
-        className="flex h-full"
-        style={{
-          width: `${images.length * 100}%`,
-          transform: `translateX(calc(-${active * 100}% / ${images.length}))`,
-          transition: "transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
-        }}
-      >
-        {images.map((src, i) => (
-          <div
-            key={i}
-            className="relative h-full flex-shrink-0"
-            style={{ width: `${100 / images.length}%` }}
-          >
-            <img
-              src={src}
-              alt={`${title} workbook page ${i + 1}`}
-              className="w-full h-full object-cover object-top"
-            />
-          </div>
-        ))}
-      </div>
+    <div className="relative w-full bg-gray-50" style={{ aspectRatio: "4/3" }}>
+      {/* Stacked images — only active one is fully visible */}
+      {images.map((src, i) => (
+        <img
+          key={i}
+          src={src}
+          alt={`${title} workbook page ${i + 1}`}
+          className="absolute inset-0 w-full h-full object-cover object-top"
+          style={{
+            opacity: i === active ? 1 : 0,
+            transition: "opacity 0.7s ease-in-out",
+            zIndex: i === active ? 1 : 0,
+          }}
+        />
+      ))}
 
       {/* Dot indicators */}
       {images.length > 1 && (
-        <div className="absolute bottom-2 left-0 right-0 flex justify-center gap-1.5">
+        <div className="absolute bottom-2 left-0 right-0 flex justify-center gap-1.5" style={{ zIndex: 2 }}>
           {images.map((_, i) => (
             <button
               key={i}
