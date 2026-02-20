@@ -27,6 +27,9 @@ import uow1 from "@/assets/uow-1.png";
 import uow2 from "@/assets/uow-2.png";
 import uow3 from "@/assets/uow-3.png";
 import uow4 from "@/assets/uow-4.png";
+import literacyCover from "@/assets/literacy-cover.png";
+import mathsCover from "@/assets/maths-cover.png";
+import uowCover from "@/assets/uow-cover.png";
 
 // ── Change this to the real WhatsApp number ──────────────────────────────────
 const WHATSAPP_NUMBER = "971500000000";
@@ -417,7 +420,7 @@ function Problem() {
 const books = [
   {
     title: "Literacy",
-    images: [literacy1, literacy2, literacy3, literacy4],
+    images: [literacyCover, literacy1, literacy2, literacy3, literacy4],
     badgeColor: "hsl(27 60% 40%)",
     badgeBg: "hsl(27 60% 40% / 0.12)",
     topics: ["Phoneme recognition", "Blending two & three-letter words", "Digraphs & sight words", "Early reading comprehension", "Synthetic phonics progression"],
@@ -425,7 +428,7 @@ const books = [
   },
   {
     title: "Maths",
-    images: [maths1, maths2, maths3, maths4],
+    images: [mathsCover, maths1, maths2, maths3, maths4],
     badgeColor: "hsl(0 75% 45%)",
     badgeBg: "hsl(0 75% 45% / 0.10)",
     topics: ["Writing numbers from 1–100", "Place value (tens & ones)", "Number lines", "Addition & subtraction basics", "Patterns & time concepts"],
@@ -433,7 +436,7 @@ const books = [
   },
   {
     title: "Understanding the World",
-    images: [uow1, uow2, uow3, uow4],
+    images: [uowCover, uow1, uow2, uow3, uow4],
     badgeColor: "hsl(142 60% 35%)",
     badgeBg: "hsl(142 60% 35% / 0.10)",
     topics: ["All About Me", "Community Helpers", "Transportation", "Fruits & Vegetables", "Everyday themes"],
