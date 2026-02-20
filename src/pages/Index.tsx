@@ -140,7 +140,10 @@ function Hero() {
             </h1>
           </div>
           <p className="text-lg text-muted-foreground leading-relaxed max-w-md">
-            Build confidence at home with structured FS2 practice designed by early years experts. Calm, clear and just 15–20 minutes a day.
+            Build confidence at home with structured FS2 practice designed by Early Years experts.
+          </p>
+          <p className="text-base text-muted-foreground leading-relaxed max-w-md">
+            Creative Minds School Readiness Pack helps children strengthen phonics, number skills, and real-world understanding — in just 15–20 minutes a day.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3">
@@ -150,7 +153,7 @@ function Hero() {
                 className="w-full sm:w-auto bg-[hsl(var(--brand-teal))] hover:bg-[hsl(var(--brand-teal-light))] text-white font-bold gap-2 shadow-lg text-base px-6"
               >
                 <MessageCircle className="w-5 h-5" />
-                Order on WhatsApp
+                Order the FS2 Pack on WhatsApp
               </Button>
             </a>
             <Button
@@ -203,10 +206,10 @@ function Hero() {
 
 // ── Problem ───────────────────────────────────────────────────────────────────
 const problems = [
-  { icon: "📖", title: "Weak phonics foundation", desc: "Without structured phonics exposure, reading readiness lags significantly behind peers." },
-  { icon: "✏️", title: "Inconsistent number writing", desc: "Irregular practice leads to poor number formation habits that are hard to undo in Year 1." },
-  { icon: "🗓", title: "Lack of structured home practice", desc: "Sporadic activity books and screen-based apps don't build the sequential skills Year 1 demands." },
-  { icon: "📱", title: "Over-reliance on screens", desc: "Digital tools rarely build the fine motor and focus skills that printed workbooks develop naturally." },
+  { icon: "📖", title: "Phonics foundations are inconsistent", desc: "Without structured phonics exposure, reading readiness lags significantly behind peers." },
+  { icon: "✏️", title: "Number writing lacks confidence", desc: "Irregular practice leads to poor number formation habits that are hard to undo in Year 1." },
+  { icon: "🗓", title: "Practice at home is unstructured", desc: "Sporadic activity books and screen-based apps don't build the sequential skills Year 1 demands." },
+  { icon: "📱", title: "Learning feels rushed or stressful", desc: "Digital tools rarely build the fine motor and focus skills that printed workbooks develop naturally." },
 ];
 
 function Problem() {
@@ -251,8 +254,7 @@ function Problem() {
         </div>
 
         <p className="text-center mt-10 text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-          We designed Creative Minds to close these gaps — gently, consistently, and without pressure.
-          Every page is intentional. Every activity builds toward the next.
+          Early years learning should feel calm, progressive, and encouraging.
         </p>
       </div>
     </section>
@@ -266,24 +268,24 @@ const books = [
     image: bookLiteracyPreview,
     badgeColor: "hsl(27 60% 40%)",
     badgeBg: "hsl(27 60% 40% / 0.12)",
-    topics: ["Phonemes & letter sounds", "Blending CVC words", "Common digraphs", "Sight word recognition", "Early comprehension"],
-    description: "A structured, phonics-first approach to reading readiness, built around the EYFS framework.",
+    topics: ["Phoneme recognition", "Blending two & three-letter words", "Digraphs & sight words", "Early reading comprehension", "Synthetic phonics progression"],
+    description: "A strong foundation for confident reading.",
   },
   {
     title: "Maths",
     image: bookMathsPreview,
     badgeColor: "hsl(0 75% 45%)",
     badgeBg: "hsl(0 75% 45% / 0.10)",
-    topics: ["Numbers 1–100", "Addition & subtraction basics", "Number lines", "Patterns & sequencing", "Time concepts"],
-    description: "Progression-based numeracy activities that move from recognition to confident application.",
+    topics: ["Writing numbers from 1–100", "Place value (tens & ones)", "Number lines", "Addition & subtraction basics", "Patterns & time concepts"],
+    description: "Clear progression that builds number confidence step by step.",
   },
   {
     title: "Understanding the World",
     image: coverUnderstandingWorld,
     badgeColor: "hsl(142 60% 35%)",
     badgeBg: "hsl(142 60% 35% / 0.10)",
-    topics: ["Community helpers", "Transportation", "Everyday life themes", "Thematic vocabulary", "EYFS topic alignment"],
-    description: "Builds early knowledge of the world through engaging themes children recognise from daily life.",
+    topics: ["All About Me", "Community Helpers", "Transportation", "Fruits & Vegetables", "Everyday themes"],
+    description: "Helping children explore and understand the world around them.",
   },
 ];
 
@@ -303,7 +305,7 @@ function Books() {
             A Complete FS2 School Readiness Pack
           </h2>
           <p className="text-muted-foreground">
-            40 structured pages per book · Premium 100gsm print
+            Three structured workbooks designed to gently build confidence at home.
           </p>
         </div>
 
@@ -358,12 +360,13 @@ function Books() {
 
 // ── Trust ─────────────────────────────────────────────────────────────────────
 const trustPoints = [
-  "Progression-based learning — every page builds on the last",
-  "40 structured pages per book",
-  "Premium 100gsm print quality",
-  "Designed and made in UAE",
-  "Aligned with both EYFS and CBSE frameworks",
-  "No random worksheets — every activity is purposeful",
+  "Designed by an EYFS Centre Manager",
+  "Structured progression across 40 pages per book",
+  "Engaging, child-friendly illustrations",
+  "Premium 100gsm paper & laminated cover",
+  "Suitable for British Curriculum FS2",
+  "Suitable for CBSE KG2 learners",
+  "Made in UAE",
 ];
 
 function Trust() {
@@ -382,7 +385,7 @@ function Trust() {
             Designed by Early Years Professionals
           </h2>
           <p className="opacity-90 text-lg max-w-xl mx-auto">
-            Not a print-and-sell worksheet pack. A carefully structured system.
+            Designed by Early Years professionals with real classroom experience.
           </p>
         </div>
 
@@ -408,6 +411,9 @@ function Trust() {
             </div>
           ))}
         </div>
+        <p className="text-center mt-8 opacity-90 font-semibold" style={{ fontFamily: "Nunito, sans-serif" }}>
+          No random worksheets. No overwhelming content. Just calm, clear learning.
+        </p>
       </div>
     </section>
   );
@@ -465,7 +471,62 @@ function HowToUse() {
           className="mt-12 text-center py-4 rounded-xl text-sm font-medium"
           style={{ background: "hsl(var(--brand-teal) / 0.08)", color: "hsl(var(--brand-teal))" }}
         >
-          No pressure. No overwhelm. Just gentle, consistent progress.
+          Short sessions. Clear structure. Real progress.
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ── Why Different ─────────────────────────────────────────────────────────────
+const whyPoints = [
+  "Every page follows logical progression",
+  "Skills build gradually",
+  "Designed by real Early Years professionals",
+  "Created specifically for Foundation Stage learners",
+];
+
+function WhyDifferent() {
+  return (
+    <section
+      className="py-16 md:py-20 px-4 sm:px-6"
+      style={{ background: "hsl(0 0% 100%)" }}
+    >
+      <div className="max-w-3xl mx-auto text-center">
+        <h2
+          className="text-3xl md:text-4xl font-black mb-8"
+          style={{ fontFamily: "Nunito, sans-serif", color: "hsl(var(--brand-navy))" }}
+        >
+          What Makes It Different?
+        </h2>
+        <p
+          className="text-xl font-semibold mb-6"
+          style={{ color: "hsl(var(--brand-navy))", fontFamily: "Nunito, sans-serif" }}
+        >
+          Unlike generic activity books:
+        </p>
+        <div className="grid sm:grid-cols-2 gap-4 text-left mb-8">
+          {whyPoints.map((point) => (
+            <div
+              key={point}
+              className="flex items-start gap-3 p-4 rounded-xl"
+              style={{ background: "hsl(var(--brand-cream))" }}
+            >
+              <CheckCircle2
+                className="w-5 h-5 flex-shrink-0 mt-0.5"
+                style={{ color: "hsl(var(--brand-teal))" }}
+              />
+              <span className="text-sm font-medium" style={{ color: "hsl(var(--brand-navy))" }}>
+                {point}
+              </span>
+            </div>
+          ))}
+        </div>
+        <div
+          className="py-4 px-6 rounded-xl text-base font-semibold"
+          style={{ background: "hsl(var(--brand-navy))", color: "hsl(0 0% 100%)", fontFamily: "Nunito, sans-serif" }}
+        >
+          This is not extra homework. It is structured reinforcement.
         </div>
       </div>
     </section>
@@ -559,7 +620,7 @@ function Pricing() {
                 <p className="text-xs opacity-70 mt-1">Save AED 15 vs buying separately</p>
               </div>
               <p className="text-sm opacity-90">
-                All three workbooks. Complete FS2 school readiness at home.
+                Best value for structured progression across all areas.
               </p>
               <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
                 <Button
@@ -575,7 +636,7 @@ function Pricing() {
         </div>
 
         <p className="text-center text-sm text-muted-foreground mt-6">
-          📦 Cash on Delivery available · Delivery within UAE · Premium 100gsm A4 workbooks
+          ✔ Cash on Delivery Available · ✔ UAE-wide delivery
         </p>
       </div>
     </section>
@@ -651,20 +712,20 @@ function Testimonials() {
 // ── FAQ ───────────────────────────────────────────────────────────────────────
 const faqs = [
   {
-    q: "Is this aligned to the British curriculum?",
-    a: "Yes. Creative Minds workbooks are designed around the EYFS (Early Years Foundation Stage) framework and are well-suited to FS2 learners in British Curriculum schools across the UAE.",
+    q: "Is this aligned with British curriculum?",
+    a: "Yes. The workbooks follow EYFS learning progression and are ideal for FS2 learners.",
   },
   {
     q: "Is it suitable for CBSE KG2 children?",
-    a: "Absolutely. The foundational literacy and numeracy skills covered in this pack align closely with KG2 readiness requirements. Families following CBSE will find it highly relevant.",
+    a: "Yes. The foundational phonics and number skills align with KG2 expectations.",
   },
   {
-    q: "Is this too academic for young children?",
-    a: "Not at all. The activities are structured and purposeful, but always age-appropriate and visually engaging. There's no pressure — the focus is on confidence, not performance.",
+    q: "Is this too academic?",
+    a: "No. The structure is gentle and child-friendly, designed to build confidence without pressure.",
   },
   {
-    q: "Is it digital or printed?",
-    a: "These are premium printed A4 workbooks on 100gsm paper. Physical books support better focus, fine motor development, and longer engagement than screen-based alternatives.",
+    q: "Is this digital or printed?",
+    a: "These are premium printed A4 workbooks with 100gsm pages and laminated covers.",
   },
   {
     q: "How do I place an order?",
@@ -723,6 +784,12 @@ function FinalCTA() {
       }}
     >
       <div className="max-w-2xl mx-auto space-y-6">
+        <p
+          className="text-base font-bold uppercase tracking-widest opacity-80"
+          style={{ fontFamily: "Nunito, sans-serif" }}
+        >
+          Confidence Starts Early.
+        </p>
         <h2
           className="text-3xl md:text-5xl font-black leading-tight"
           style={{ fontFamily: "Nunito, sans-serif" }}
@@ -730,7 +797,7 @@ function FinalCTA() {
           Give Your Child Confidence Before Year 1
         </h2>
         <p className="text-lg opacity-90">
-          Structured. Calm. Expert-designed. Ready to use today.
+          Give your child a calm, structured foundation before Year 1.
         </p>
         <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
           <Button
@@ -739,7 +806,7 @@ function FinalCTA() {
             style={{ color: "hsl(var(--brand-teal))" }}
           >
             <MessageCircle className="w-5 h-5" />
-            Order Now on WhatsApp
+            Order the FS2 Pack Today
           </Button>
         </a>
         <p className="text-sm opacity-75">
@@ -808,6 +875,7 @@ const Index = () => {
         <Books />
         <Trust />
         <HowToUse />
+        <WhyDifferent />
         <Pricing />
         <Testimonials />
         <FAQ />
