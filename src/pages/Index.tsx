@@ -142,21 +142,46 @@ function WaveBackground({ flip = false, className = "" }: { flip?: boolean; clas
 
 // ── Hero ──────────────────────────────────────────────────────────────────────
 const heroCovers = [
-  { src: coverLiteracy, alt: "Creative Minds Literacy Workbook — Unlock Your Imagination with Every Word", label: "Literacy" },
-  { src: coverMaths, alt: "Creative Minds Maths Workbook — Count, Explore, and Have Fun", label: "Maths" },
-  { src: coverUow, alt: "Creative Minds Understanding the World Workbook — See the World Through Curious Eyes", label: "Understanding the World" },
+  {
+    src: coverLiteracy,
+    alt: "Creative Minds Literacy Workbook — Unlock Your Imagination with Every Word",
+    label: "Literacy",
+    tagline: "Phonics · Blending · Reading Comprehension",
+    accentColor: "hsl(27 60% 40%)",
+    gradientFrom: "hsl(27 60% 35% / 0.85)",
+    gradientMid: "hsl(27 60% 35% / 0.3)",
+  },
+  {
+    src: coverMaths,
+    alt: "Creative Minds Maths Workbook — Count, Explore, and Have Fun",
+    label: "Maths",
+    tagline: "Numbers · Place Value · Addition & Subtraction",
+    accentColor: "hsl(0 75% 45%)",
+    gradientFrom: "hsl(0 75% 40% / 0.85)",
+    gradientMid: "hsl(0 75% 40% / 0.3)",
+  },
+  {
+    src: coverUow,
+    alt: "Creative Minds Understanding the World Workbook — See the World Through Curious Eyes",
+    label: "Understanding the World",
+    tagline: "Community · Transport · Everyday Themes",
+    accentColor: "hsl(142 60% 35%)",
+    gradientFrom: "hsl(142 60% 28% / 0.85)",
+    gradientMid: "hsl(142 60% 28% / 0.3)",
+  },
 ];
 
 function Hero() {
   const [active, setActive] = useState(0);
 
-  // Auto-advance — no animating state, no setTimeout churn
   useEffect(() => {
     const timer = setInterval(() => {
       setActive((prev) => (prev + 1) % heroCovers.length);
-    }, 4000);
+    }, 4200);
     return () => clearInterval(timer);
   }, []);
+
+  const cover = heroCovers[active];
 
   return (
     <section
@@ -164,7 +189,7 @@ function Hero() {
       className="relative overflow-hidden pt-16 md:pt-24 pb-0 px-4 sm:px-6"
       style={{ background: "linear-gradient(160deg, hsl(var(--brand-cream)) 0%, hsl(0 0% 100%) 55%)" }}
     >
-      {/* Decorative blobs — pointer-events-none so they never shift layout */}
+      {/* Decorative blobs */}
       <div
         className="absolute -top-32 -right-32 w-96 h-96 rounded-full opacity-10 blur-3xl pointer-events-none"
         style={{ background: "hsl(var(--brand-teal))" }}
@@ -174,10 +199,9 @@ function Hero() {
         style={{ background: "hsl(var(--brand-amber))" }}
       />
 
-      {/* Grid: copy left, slideshow right */}
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center pb-12 md:pb-16">
 
-        {/* ── Left: copy (no z-index fighting, stable position) ─────────────── */}
+        {/* Left: copy — completely independent, never moves */}
         <div className="space-y-6">
           <div>
             <span
@@ -228,59 +252,82 @@ function Hero() {
           </div>
         </div>
 
-        {/* ── Right: CSS crossfade slideshow ────────────────────────────────── */}
-        <div className="flex flex-col items-center md:items-end gap-4">
-          {/*
-            All images are stacked absolutely inside a fixed aspect-ratio wrapper.
-            Only the active one has opacity-1; the rest are opacity-0.
-            Pure CSS transition — no key churn, no setTimeout, no flicker.
-          */}
-          <div className="relative w-full max-w-sm md:max-w-md" style={{ aspectRatio: "4/3" }}>
-            {heroCovers.map((cover, i) => (
-              <img
-                key={cover.label}
-                src={cover.src}
-                alt={cover.alt}
-                className="absolute inset-0 w-full h-full object-cover rounded-2xl shadow-2xl"
-                style={{
-                  opacity: i === active ? 1 : 0,
-                  transition: "opacity 0.7s ease-in-out",
-                  willChange: "opacity",
-                }}
-              />
-            ))}
-            {/* Book label badge — driven by state, not by an image reorder */}
+        {/* Right: sliding track carousel */}
+        <div className="flex flex-col items-center md:items-end gap-3">
+
+          {/* ── Main slideshow window ─────────────────────────────────────── */}
+          <div
+            className="w-full max-w-sm md:max-w-md overflow-hidden rounded-2xl shadow-2xl"
+            style={{ aspectRatio: "4/3" }}
+          >
+            {/* Sliding track — width = 300%, slides left by 0/33.33/66.67% */}
             <div
-              className="absolute bottom-3 left-3 px-3 py-1 rounded-full text-xs font-bold shadow-lg z-10"
+              className="flex h-full"
               style={{
-                background: "hsl(var(--brand-navy))",
-                color: "hsl(0 0% 100%)",
-                fontFamily: "Nunito, sans-serif",
-                transition: "opacity 0.3s ease",
+                width: `${heroCovers.length * 100}%`,
+                transform: `translateX(calc(-${active * 100}% / ${heroCovers.length}))`,
+                transition: "transform 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
               }}
             >
-              {heroCovers[active].label}
+              {heroCovers.map((c) => (
+                <div
+                  key={c.label}
+                  className="relative h-full flex-shrink-0"
+                  style={{ width: `${100 / heroCovers.length}%` }}
+                >
+                  <img
+                    src={c.src}
+                    alt={c.alt}
+                    className="w-full h-full object-cover"
+                  />
+                  {/* Per-book colour gradient overlay with subject label */}
+                  <div
+                    className="absolute inset-0 flex flex-col justify-end p-4"
+                    style={{
+                      background: `linear-gradient(to top, ${c.gradientFrom} 0%, ${c.gradientMid} 45%, transparent 70%)`,
+                    }}
+                  >
+                    <p
+                      className="text-white font-black text-lg leading-tight"
+                      style={{ fontFamily: "Nunito, sans-serif", textShadow: "0 1px 4px rgba(0,0,0,0.4)" }}
+                    >
+                      {c.label}
+                    </p>
+                    <p className="text-white text-xs mt-0.5" style={{ opacity: 0.9, textShadow: "0 1px 3px rgba(0,0,0,0.4)" }}>
+                      {c.tagline}
+                    </p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
 
-          {/* Dot indicators */}
-          <div className="flex gap-2 mt-1">
-            {heroCovers.map((cover, i) => (
+          {/* ── Thumbnail strip — shows all 3 books, active highlighted ──── */}
+          <div className="flex gap-2 w-full max-w-sm md:max-w-md">
+            {heroCovers.map((c, i) => (
               <button
-                key={cover.label}
+                key={c.label}
                 onClick={() => setActive(i)}
-                aria-label={`Show ${cover.label} cover`}
-                className="rounded-full transition-all duration-500"
+                aria-label={`Show ${c.label} cover`}
+                className="flex-1 overflow-hidden rounded-lg transition-all duration-300"
                 style={{
-                  width: i === active ? "28px" : "10px",
-                  height: "10px",
-                  background: i === active
-                    ? "hsl(var(--brand-teal))"
-                    : "hsl(var(--brand-teal) / 0.3)",
+                  aspectRatio: "4/3",
+                  outline: i === active ? `3px solid ${c.accentColor}` : "3px solid transparent",
+                  outlineOffset: "2px",
+                  opacity: i === active ? 1 : 0.55,
+                  transform: i === active ? "scale(1.04)" : "scale(1)",
+                  transition: "opacity 0.35s ease, transform 0.35s ease, outline-color 0.35s ease",
                 }}
-              />
+              >
+                <img
+                  src={c.src}
+                  alt={c.label}
+                  className="w-full h-full object-cover"
+                />
+              </button>
             ))}
           </div>
+
         </div>
       </div>
 
@@ -292,7 +339,6 @@ function Hero() {
         Confidence Starts Early.
       </div>
 
-      {/* Wave transition into next section */}
       <WaveBackground />
     </section>
   );
