@@ -201,16 +201,50 @@ function Hero() {
     <section
       id="hero"
       className="relative overflow-hidden pt-16 md:pt-24 pb-0 px-4 sm:px-6"
-      style={{ background: "linear-gradient(160deg, hsl(var(--brand-cream)) 0%, hsl(0 0% 100%) 55%)" }}
+      style={{ background: "linear-gradient(145deg, hsl(var(--brand-cream)) 0%, hsl(38 80% 96%) 40%, hsl(175 60% 96%) 100%)" }}
     >
-      {/* Decorative blobs */}
+      {/* ── Abstract SVG pattern layer ─────────────────────────────────── */}
+      <svg
+        aria-hidden="true"
+        className="absolute inset-0 w-full h-full pointer-events-none"
+        xmlns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="xMidYMid slice"
+      >
+        <defs>
+          <pattern id="hero-dots" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
+            <circle cx="2" cy="2" r="1.5" fill="hsl(var(--brand-teal))" opacity="0.12" />
+            <circle cx="32" cy="32" r="1" fill="hsl(var(--brand-pink))" opacity="0.10" />
+            <circle cx="58" cy="10" r="1.2" fill="hsl(var(--brand-amber))" opacity="0.10" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#hero-dots)" />
+
+        {/* Soft floating rings */}
+        <circle cx="88%" cy="12%" r="120" fill="none" stroke="hsl(var(--brand-teal))" strokeWidth="1.5" opacity="0.08" />
+        <circle cx="88%" cy="12%" r="80" fill="none" stroke="hsl(var(--brand-teal))" strokeWidth="1" opacity="0.07" />
+        <circle cx="8%" cy="80%" r="90" fill="none" stroke="hsl(var(--brand-pink))" strokeWidth="1.5" opacity="0.07" />
+        <circle cx="8%" cy="80%" r="55" fill="none" stroke="hsl(var(--brand-pink))" strokeWidth="1" opacity="0.06" />
+        <circle cx="50%" cy="95%" r="140" fill="none" stroke="hsl(var(--brand-amber))" strokeWidth="1" opacity="0.06" />
+
+        {/* Scattered soft shapes */}
+        <rect x="75%" y="55%" width="28" height="28" rx="6" fill="hsl(var(--brand-amber))" opacity="0.06" transform="rotate(20,0,0)" />
+        <rect x="15%" y="18%" width="20" height="20" rx="5" fill="hsl(var(--brand-teal))" opacity="0.07" transform="rotate(-15,0,0)" />
+        <circle cx="62%" cy="22%" r="18" fill="hsl(var(--brand-pink))" opacity="0.06" />
+        <circle cx="30%" cy="72%" r="12" fill="hsl(var(--brand-teal))" opacity="0.06" />
+      </svg>
+
+      {/* Decorative blobs — more vivid */}
       <div
-        className="absolute -top-32 -right-32 w-96 h-96 rounded-full opacity-10 blur-3xl pointer-events-none"
+        className="absolute -top-24 -right-24 w-[420px] h-[420px] rounded-full opacity-[0.13] blur-3xl pointer-events-none"
         style={{ background: "hsl(var(--brand-teal))" }}
       />
       <div
-        className="absolute top-10 -left-20 w-64 h-64 rounded-full opacity-10 blur-3xl pointer-events-none"
+        className="absolute top-16 -left-16 w-72 h-72 rounded-full opacity-[0.13] blur-3xl pointer-events-none"
         style={{ background: "hsl(var(--brand-amber))" }}
+      />
+      <div
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[500px] h-40 rounded-full opacity-[0.08] blur-3xl pointer-events-none"
+        style={{ background: "hsl(var(--brand-pink))" }}
       />
 
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center pb-12 md:pb-16">
