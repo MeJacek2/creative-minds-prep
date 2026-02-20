@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Menu, X, CheckCircle2, Star, MessageCircle, Package, Clock, BookOpen, Sparkles, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -10,10 +10,12 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-import coversAllThree from "@/assets/covers-all-three.png";
 import coverUnderstandingWorld from "@/assets/cover-understanding-world.png";
 import bookLiteracyPreview from "@/assets/book-literacy-preview.png";
 import bookMathsPreview from "@/assets/book-maths-preview.png";
+import coverLiteracy from "@/assets/cover-literacy.png";
+import coverMaths from "@/assets/cover-maths.png";
+import coverUow from "@/assets/cover-uow.png";
 
 // ── Change this to the real WhatsApp number ──────────────────────────────────
 const WHATSAPP_NUMBER = "971500000000";
@@ -113,17 +115,81 @@ function Nav() {
   );
 }
 
+// ── Wave SVG Background ───────────────────────────────────────────────────────
+function WaveBackground({ flip = false, className = "" }: { flip?: boolean; className?: string }) {
+  return (
+    <div className={`w-full overflow-hidden leading-none ${flip ? "rotate-180" : ""} ${className}`}>
+      <svg viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" className="w-full h-16 md:h-24">
+        <path
+          d="M0,60 C180,110 360,10 540,60 C720,110 900,10 1080,60 C1260,110 1380,30 1440,60 L1440,120 L0,120 Z"
+          fill="hsl(var(--brand-teal))"
+          opacity="0.15"
+        />
+        <path
+          d="M0,80 C200,30 400,110 600,70 C800,30 1000,100 1200,60 C1320,40 1400,80 1440,70 L1440,120 L0,120 Z"
+          fill="hsl(var(--brand-amber))"
+          opacity="0.18"
+        />
+        <path
+          d="M0,95 C150,60 350,120 550,90 C750,60 950,110 1150,80 C1300,60 1400,95 1440,85 L1440,120 L0,120 Z"
+          fill="hsl(var(--brand-pink))"
+          opacity="0.12"
+        />
+      </svg>
+    </div>
+  );
+}
+
 // ── Hero ──────────────────────────────────────────────────────────────────────
+const heroCovers = [
+  { src: coverLiteracy, alt: "Creative Minds Literacy Workbook — Unlock Your Imagination with Every Word", label: "Literacy" },
+  { src: coverMaths, alt: "Creative Minds Maths Workbook — Count, Explore, and Have Fun", label: "Maths" },
+  { src: coverUow, alt: "Creative Minds Understanding the World Workbook — See the World Through Curious Eyes", label: "Understanding the World" },
+];
+
 function Hero() {
+  const [active, setActive] = useState(0);
+  const [animating, setAnimating] = useState(false);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setAnimating(true);
+      setTimeout(() => {
+        setActive((prev) => (prev + 1) % heroCovers.length);
+        setAnimating(false);
+      }, 300);
+    }, 3500);
+    return () => clearInterval(timer);
+  }, []);
+
+  const goTo = (index: number) => {
+    if (index === active) return;
+    setAnimating(true);
+    setTimeout(() => {
+      setActive(index);
+      setAnimating(false);
+    }, 300);
+  };
+
   return (
     <section
       id="hero"
-      className="py-16 md:py-24 px-4 sm:px-6"
-      style={{ background: "linear-gradient(135deg, hsl(var(--brand-cream)) 0%, hsl(0 0% 100%) 60%)" }}
+      className="relative overflow-hidden pt-16 md:pt-24 pb-0 px-4 sm:px-6"
+      style={{ background: "linear-gradient(160deg, hsl(var(--brand-cream)) 0%, hsl(0 0% 100%) 55%)" }}
     >
-      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center">
+      {/* Decorative wave blobs */}
+      <div
+        className="absolute -top-32 -right-32 w-96 h-96 rounded-full opacity-10 blur-3xl pointer-events-none"
+        style={{ background: "hsl(var(--brand-teal))" }}
+      />
+      <div
+        className="absolute top-10 -left-20 w-64 h-64 rounded-full opacity-10 blur-3xl pointer-events-none"
+        style={{ background: "hsl(var(--brand-amber))" }}
+      />
+
+      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center pb-12 md:pb-16">
         {/* Left: copy */}
-        <div className="space-y-6">
+        <div className="space-y-6 relative z-10">
           <div>
             <span
               className="inline-block text-xs font-bold uppercase tracking-widest mb-3 px-3 py-1 rounded-full"
@@ -173,33 +239,58 @@ function Hero() {
           </div>
         </div>
 
-        {/* Right: product image */}
-        <div className="flex justify-center md:justify-end">
-          <div className="relative">
-            <div
-              className="absolute inset-0 rounded-3xl blur-3xl opacity-20 -z-10"
-              style={{ background: "hsl(var(--brand-teal))", transform: "scale(0.9) translateY(10%)" }}
-            />
+        {/* Right: animated cover slideshow */}
+        <div className="flex flex-col items-center md:items-end gap-4 relative z-10">
+          <div className="relative w-full max-w-sm md:max-w-md">
             <img
-              src={coversAllThree}
-              alt="Creative Minds FS2 School Readiness Workbooks – Literacy, Maths and Understanding the World"
-              className="w-full max-w-xs md:max-w-sm lg:max-w-md object-contain drop-shadow-2xl"
+              key={active}
+              src={heroCovers[active].src}
+              alt={heroCovers[active].alt}
+              className="w-full rounded-2xl shadow-2xl object-cover transition-all duration-300"
+              style={{
+                opacity: animating ? 0 : 1,
+                transform: animating ? "scale(0.97) translateY(6px)" : "scale(1) translateY(0)",
+                transition: "opacity 0.3s ease, transform 0.3s ease",
+              }}
             />
+            {/* Book label badge */}
+            <div
+              className="absolute bottom-3 left-3 px-3 py-1 rounded-full text-xs font-bold shadow-lg"
+              style={{ background: "hsl(var(--brand-navy))", color: "hsl(0 0% 100%)", fontFamily: "Nunito, sans-serif" }}
+            >
+              {heroCovers[active].label}
+            </div>
+          </div>
+
+          {/* Dot indicators */}
+          <div className="flex gap-2 mt-1">
+            {heroCovers.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => goTo(i)}
+                aria-label={`Show ${heroCovers[i].label} cover`}
+                className="transition-all duration-300 rounded-full"
+                style={{
+                  width: i === active ? "28px" : "10px",
+                  height: "10px",
+                  background: i === active ? "hsl(var(--brand-teal))" : "hsl(var(--brand-teal) / 0.3)",
+                }}
+              />
+            ))}
           </div>
         </div>
       </div>
 
       {/* Tagline strip */}
       <div
-        className="mt-16 py-4 text-center text-lg font-bold tracking-wide rounded-xl max-w-6xl mx-auto"
-        style={{
-          background: "hsl(var(--brand-teal) / 0.08)",
-          color: "hsl(var(--brand-teal))",
-          fontFamily: "Nunito, sans-serif",
-        }}
+        className="py-4 text-center text-lg font-bold tracking-wide max-w-6xl mx-auto mb-2"
+        style={{ color: "hsl(var(--brand-teal))", fontFamily: "Nunito, sans-serif" }}
       >
         Confidence Starts Early.
       </div>
+
+      {/* Wave transition into next section */}
+      <WaveBackground />
     </section>
   );
 }
@@ -216,7 +307,7 @@ function Problem() {
   return (
     <section
       id="about"
-      className="py-16 md:py-20 px-4 sm:px-6"
+      className="relative overflow-hidden pt-16 md:pt-20 pb-0 px-4 sm:px-6"
       style={{ background: "hsl(var(--brand-cream))" }}
     >
       <div className="max-w-6xl mx-auto">
@@ -257,6 +348,7 @@ function Problem() {
           Early years learning should feel calm, progressive, and encouraging.
         </p>
       </div>
+      <WaveBackground flip className="mt-8" />
     </section>
   );
 }
@@ -372,7 +464,7 @@ const trustPoints = [
 function Trust() {
   return (
     <section
-      className="py-16 md:py-20 px-4 sm:px-6"
+      className="relative overflow-hidden pt-16 md:pt-20 pb-0 px-4 sm:px-6"
       style={{ background: "hsl(var(--brand-teal))" }}
     >
       <div className="max-w-5xl mx-auto text-white">
@@ -414,6 +506,12 @@ function Trust() {
         <p className="text-center mt-8 opacity-90 font-semibold" style={{ fontFamily: "Nunito, sans-serif" }}>
           No random worksheets. No overwhelming content. Just calm, clear learning.
         </p>
+      </div>
+      {/* Wave bottom — inverted so white merges from below */}
+      <div className="w-full overflow-hidden leading-none mt-8">
+        <svg viewBox="0 0 1440 100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" className="w-full h-14 md:h-20">
+          <path d="M0,50 C200,10 400,90 600,50 C800,10 1000,90 1200,50 C1320,30 1400,60 1440,50 L1440,100 L0,100 Z" fill="hsl(0 0% 100%)" />
+        </svg>
       </div>
     </section>
   );
