@@ -835,7 +835,7 @@ function Pricing() {
               <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
                 <Button
                   variant="outline"
-                  className="w-full font-semibold border-2 mt-2"
+                  className="w-full font-semibold border-2 mt-2 hover:text-white"
                   style={{ borderColor: "hsl(var(--brand-teal))", color: "hsl(var(--brand-teal))" }}
                 >
                   <MessageCircle className="w-4 h-4 mr-2" />
