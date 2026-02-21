@@ -290,8 +290,8 @@ function Hero() {
               size="lg"
               variant="outline"
               onClick={() => scrollTo("books")}
-              className="w-full sm:w-auto font-semibold text-base px-6 border-2"
-              style={{ borderColor: "hsl(var(--brand-navy))", color: "hsl(var(--brand-navy))" }}
+              className="w-full sm:w-auto font-semibold text-base px-6 border-2 text-white hover:opacity-90"
+              style={{ backgroundColor: "hsl(var(--brand-pink))", borderColor: "hsl(var(--brand-pink))", color: "white" }}
             >
               See Sample Pages
             </Button>
