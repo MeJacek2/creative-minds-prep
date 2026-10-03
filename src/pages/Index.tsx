@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Menu, X, CheckCircle2, Star, MessageCircle, Package, Clock, BookOpen, Sparkles, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -679,6 +679,39 @@ function Trust() {
 import introVideoAsset from "@/assets/intro-video.mp4.asset.json";
 
 function IntroVideo() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [stage, setStage] = useState(0);
+
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    const onTime = () => {
+      if (!v.duration) return;
+      const p = v.currentTime / v.duration;
+      setStage(p < 0.2 ? 0 : p < 0.42 ? 1 : p < 0.64 ? 2 : 3);
+    };
+    v.addEventListener("timeupdate", onTime);
+    return () => v.removeEventListener("timeupdate", onTime);
+  }, []);
+
+  const captions = [
+    {
+      title: "Literacy",
+      color: "hsl(var(--brand-teal))",
+      topics: "Phonics • Blending • Digraphs • Sight Words",
+    },
+    {
+      title: "Maths",
+      color: "hsl(var(--brand-pink))",
+      topics: "Numbers to 100 • Addition • Subtraction • Patterns • Time",
+    },
+    {
+      title: "Understanding the World",
+      color: "hsl(var(--brand-amber))",
+      topics: "Everyday themes • People • Places • Environment",
+    },
+  ];
+
   return (
     <section
       className="py-16 md:py-20 px-4 sm:px-6"
@@ -698,13 +731,65 @@ function IntroVideo() {
           className="rounded-2xl overflow-hidden shadow-lg mx-auto"
           style={{ border: "1px solid hsl(var(--brand-teal) / 0.15)", maxWidth: "960px" }}
         >
-          <video
-            src={introVideoAsset.url}
-            className="w-full aspect-video"
-            controls
-            playsInline
-            preload="auto"
-          />
+          <div className="relative">
+            <video
+              ref={videoRef}
+              src={introVideoAsset.url}
+              className="w-full aspect-video"
+              controls
+              playsInline
+              preload="auto"
+            />
+            {/* Caption overlay */}
+            <div
+              className="absolute inset-0 flex items-center justify-center px-6 pointer-events-none"
+              style={{ background: "linear-gradient(to top, rgba(20,30,50,0.45), rgba(20,30,50,0.1) 45%, rgba(20,30,50,0.15))" }}
+            >
+              {stage === 0 && (
+                <div key="headline" className="caption-in text-center">
+                  <h3
+                    className="text-2xl md:text-4xl font-black text-white leading-tight mb-2"
+                    style={{ fontFamily: "Nunito, sans-serif", textShadow: "0 2px 12px rgba(0,0,0,0.35)" }}
+                  >
+                    3 Workbooks. 3 Key Learning Areas.
+                  </h3>
+                  <p className="text-sm md:text-base text-white/90" style={{ textShadow: "0 1px 8px rgba(0,0,0,0.35)" }}>
+                    Structured practice for FS2 &amp; KG2 learners
+                  </p>
+                </div>
+              )}
+              {stage > 0 && (
+                <div key={`caption-${stage}`} className="caption-in text-center">
+                  <h3
+                    className="text-xl md:text-3xl font-black text-white mb-2"
+                    style={{ fontFamily: "Nunito, sans-serif", textShadow: "0 2px 12px rgba(0,0,0,0.35)" }}
+                  >
+                    <span
+                      className="inline-block w-3 h-3 md:w-4 md:h-4 rounded-full mr-2 align-middle"
+                      style={{ background: captions[stage - 1].color }}
+                    />
+                    {captions[stage - 1].title}
+                  </h3>
+                  <p className="text-xs md:text-base text-white/90 tracking-wide" style={{ textShadow: "0 1px 8px rgba(0,0,0,0.35)" }}>
+                    {captions[stage - 1].topics}
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
+          {/* Bottom pricing strip */}
+          <div
+            className="caption-in flex items-center justify-center gap-2 py-3 px-4 text-sm md:text-base font-bold"
+            style={{
+              background: "hsl(var(--brand-navy))",
+              color: "hsl(0 0% 100%)",
+              fontFamily: "Nunito, sans-serif",
+            }}
+          >
+            <span>3-Book Pack AED 90</span>
+            <span className="opacity-50 font-normal">|</span>
+            <span>Individual Book AED 35</span>
+          </div>
         </div>
       </div>
     </section>
