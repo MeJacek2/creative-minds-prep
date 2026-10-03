@@ -1166,9 +1166,9 @@ const Index = () => {
         <Problem />
         <Books />
         <Trust />
-        <IntroVideo />
         <HowToUse />
         <WhyDifferent />
+        <IntroVideo />
         <Pricing />
         <Testimonials />
         <FAQ />
