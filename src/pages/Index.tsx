@@ -32,7 +32,7 @@ import mathsCover from "@/assets/maths-cover.png";
 import uowCover from "@/assets/uow-cover.png";
 
 // ── Change this to the real WhatsApp number ──────────────────────────────────
-const WHATSAPP_NUMBER = "971500000000";
+const WHATSAPP_NUMBER = "971501561242";
 const WHATSAPP_MESSAGE = "Hi%2C%20I%20would%20like%20to%20order%20the%20FS2%20School%20Readiness%20Pack.";
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MESSAGE}`;
 // ─────────────────────────────────────────────────────────────────────────────
