@@ -36,7 +36,9 @@ const WHATSAPP_NUMBER = "971501561242";
 const WHATSAPP_MESSAGE = "Hi%2C%20I%20would%20like%20to%20order%20the%20FS2%20School%20Readiness%20Pack.";
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MESSAGE}`;
 
-// ── Stripe Payment Links (TEST mode — swap for live links before launch) ─────
+// ── Stripe Payment Links ─────────────────────────────────────────────────────
+// Set to true to show "Pay by Card" buttons everywhere (swap links for live ones first).
+const SHOW_CARD_PAYMENT = false;
 const STRIPE_LINKS = {
   literacy: "https://buy.stripe.com/test_3cIfZieYs6k2dlIdsN6EU00",
   maths: "https://buy.stripe.com/test_8x28wQ9E89wegxU3Sd6EU01",
@@ -611,16 +613,18 @@ function Books() {
                     </li>
                   ))}
                 </ul>
-                <a href={book.stripeLink} target="_blank" rel="noopener noreferrer">
-                  <Button
-                    variant="outline"
-                    className="w-full font-semibold border-2 mt-1"
-                    style={{ borderColor: "hsl(var(--brand-teal) / 0.4)", color: "hsl(var(--brand-teal))" }}
-                  >
-                    <CreditCard className="w-4 h-4 mr-2" />
-                    Pay by Card – AED 35
-                  </Button>
-                </a>
+                {SHOW_CARD_PAYMENT && (
+                  <a href={book.stripeLink} target="_blank" rel="noopener noreferrer">
+                    <Button
+                      variant="outline"
+                      className="w-full font-semibold border-2 mt-1"
+                      style={{ borderColor: "hsl(var(--brand-teal) / 0.4)", color: "hsl(var(--brand-teal))" }}
+                    >
+                      <CreditCard className="w-4 h-4 mr-2" />
+                      Pay by Card – AED 35
+                    </Button>
+                  </a>
+                )}
               </CardContent>
             </Card>
           ))}
@@ -865,14 +869,16 @@ function Pricing() {
                   Order on WhatsApp
                 </Button>
               </a>
-              <p className="text-xs text-muted-foreground">
-                Prefer card? Pay securely for{" "}
-                <a href={STRIPE_LINKS.literacy} target="_blank" rel="noopener noreferrer" className="underline hover:text-foreground">Literacy</a>
-                {" · "}
-                <a href={STRIPE_LINKS.maths} target="_blank" rel="noopener noreferrer" className="underline hover:text-foreground">Maths</a>
-                {" · "}
-                <a href={STRIPE_LINKS.uow} target="_blank" rel="noopener noreferrer" className="underline hover:text-foreground">Understanding the World</a>
-              </p>
+              {SHOW_CARD_PAYMENT && (
+                <p className="text-xs text-muted-foreground">
+                  Prefer card? Pay securely for{" "}
+                  <a href={STRIPE_LINKS.literacy} target="_blank" rel="noopener noreferrer" className="underline hover:text-foreground">Literacy</a>
+                  {" · "}
+                  <a href={STRIPE_LINKS.maths} target="_blank" rel="noopener noreferrer" className="underline hover:text-foreground">Maths</a>
+                  {" · "}
+                  <a href={STRIPE_LINKS.uow} target="_blank" rel="noopener noreferrer" className="underline hover:text-foreground">Understanding the World</a>
+                </p>
+              )}
             </CardContent>
           </Card>
 
@@ -918,16 +924,18 @@ function Pricing() {
                   Order on WhatsApp
                 </Button>
               </a>
-              <a href={STRIPE_LINKS.pack} target="_blank" rel="noopener noreferrer">
-                <Button
-                  variant="outline"
-                  className="w-full font-bold mt-1 bg-transparent border-2"
-                  style={{ borderColor: "hsl(0 0% 100%)", color: "hsl(0 0% 100%)" }}
-                >
-                  <CreditCard className="w-4 h-4 mr-2" />
-                  Pay by Card – AED 90
-                </Button>
-              </a>
+              {SHOW_CARD_PAYMENT && (
+                <a href={STRIPE_LINKS.pack} target="_blank" rel="noopener noreferrer">
+                  <Button
+                    variant="outline"
+                    className="w-full font-bold mt-1 bg-transparent border-2"
+                    style={{ borderColor: "hsl(0 0% 100%)", color: "hsl(0 0% 100%)" }}
+                  >
+                    <CreditCard className="w-4 h-4 mr-2" />
+                    Pay by Card – AED 90
+                  </Button>
+                </a>
+              )}
             </CardContent>
           </Card>
         </div>
@@ -1026,7 +1034,9 @@ const faqs = [
   },
   {
     q: "How do I place an order?",
-    a: "Two easy ways: pay securely by card using any 'Pay by Card' button, or order on WhatsApp where we'll confirm your order, delivery address, and preferred titles. Cash on Delivery is available across the UAE.",
+    a: SHOW_CARD_PAYMENT
+      ? "Two easy ways: pay securely by card using any 'Pay by Card' button, or order on WhatsApp where we'll confirm your order, delivery address, and preferred titles. Cash on Delivery is available across the UAE."
+      : "Order on WhatsApp and we'll confirm your order, delivery address, and preferred titles. Payment is by Cash on Delivery, available across the UAE.",
   },
 ];
 
