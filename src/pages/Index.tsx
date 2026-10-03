@@ -1026,7 +1026,7 @@ const faqs = [
   },
   {
     q: "How do I place an order?",
-    a: "Simply click any 'Order on WhatsApp' button. You'll be connected directly where we'll confirm your order, delivery address, and preferred titles. Cash on Delivery is available across the UAE.",
+    a: "Two easy ways: pay securely by card using any 'Pay by Card' button, or order on WhatsApp where we'll confirm your order, delivery address, and preferred titles. Cash on Delivery is available across the UAE.",
   },
 ];
 
