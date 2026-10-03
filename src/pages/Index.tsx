@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from "react";
-import { Menu, X, CheckCircle2, Star, MessageCircle, Package, Clock, BookOpen, Sparkles, ChevronDown } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Menu, X, CheckCircle2, Star, MessageCircle, Package, Clock, BookOpen, Sparkles, ChevronDown, CreditCard } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -35,7 +35,16 @@ import uowCover from "@/assets/uow-cover.png";
 const WHATSAPP_NUMBER = "971501561242";
 const WHATSAPP_MESSAGE = "Hi%2C%20I%20would%20like%20to%20order%20the%20FS2%20School%20Readiness%20Pack.";
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MESSAGE}`;
+
+// ── Stripe Payment Links (TEST mode — swap for live links before launch) ─────
+const STRIPE_LINKS = {
+  literacy: "https://buy.stripe.com/test_3cIfZieYs6k2dlIdsN6EU00",
+  maths: "https://buy.stripe.com/test_8x28wQ9E89wegxU3Sd6EU01",
+  uow: "https://buy.stripe.com/test_aFafZi7w08sachEcoJ6EU02",
+  pack: "https://buy.stripe.com/test_cNicN603yeQygxUbkF6EU03",
+};
 // ─────────────────────────────────────────────────────────────────────────────
+
 
 const scrollTo = (id: string) => {
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -471,6 +480,7 @@ const books = [
     badgeBg: "hsl(27 60% 40% / 0.12)",
     topics: ["Phoneme recognition", "Blending two & three-letter words", "Digraphs & sight words", "Early reading comprehension", "Synthetic phonics progression"],
     description: "A strong foundation for confident reading.",
+    stripeLink: STRIPE_LINKS.literacy,
   },
   {
     title: "Maths",
@@ -479,6 +489,7 @@ const books = [
     badgeBg: "hsl(0 75% 45% / 0.10)",
     topics: ["Writing numbers from 1–100", "Place value (tens & ones)", "Number lines", "Addition & subtraction basics", "Patterns & time concepts"],
     description: "Clear progression that builds number confidence step by step.",
+    stripeLink: STRIPE_LINKS.maths,
   },
   {
     title: "Understanding the World",
@@ -487,6 +498,7 @@ const books = [
     badgeBg: "hsl(142 60% 35% / 0.10)",
     topics: ["All About Me", "Community Helpers", "Transportation", "Fruits & Vegetables", "Everyday themes"],
     description: "Helping children explore and understand the world around them.",
+    stripeLink: STRIPE_LINKS.uow,
   },
 ];
 
@@ -599,6 +611,16 @@ function Books() {
                     </li>
                   ))}
                 </ul>
+                <a href={book.stripeLink} target="_blank" rel="noopener noreferrer">
+                  <Button
+                    variant="outline"
+                    className="w-full font-semibold border-2 mt-1"
+                    style={{ borderColor: "hsl(var(--brand-teal) / 0.4)", color: "hsl(var(--brand-teal))" }}
+                  >
+                    <CreditCard className="w-4 h-4 mr-2" />
+                    Pay by Card – AED 35
+                  </Button>
+                </a>
               </CardContent>
             </Card>
           ))}
@@ -963,6 +985,14 @@ function Pricing() {
                   Order on WhatsApp
                 </Button>
               </a>
+              <p className="text-xs text-muted-foreground">
+                Prefer card? Pay securely for{" "}
+                <a href={STRIPE_LINKS.literacy} target="_blank" rel="noopener noreferrer" className="underline hover:text-foreground">Literacy</a>
+                {" · "}
+                <a href={STRIPE_LINKS.maths} target="_blank" rel="noopener noreferrer" className="underline hover:text-foreground">Maths</a>
+                {" · "}
+                <a href={STRIPE_LINKS.uow} target="_blank" rel="noopener noreferrer" className="underline hover:text-foreground">Understanding the World</a>
+              </p>
             </CardContent>
           </Card>
 
@@ -1006,6 +1036,16 @@ function Pricing() {
                 >
                   <MessageCircle className="w-4 h-4 mr-2" />
                   Order on WhatsApp
+                </Button>
+              </a>
+              <a href={STRIPE_LINKS.pack} target="_blank" rel="noopener noreferrer">
+                <Button
+                  variant="outline"
+                  className="w-full font-bold mt-1 bg-transparent border-2"
+                  style={{ borderColor: "hsl(0 0% 100%)", color: "hsl(0 0% 100%)" }}
+                >
+                  <CreditCard className="w-4 h-4 mr-2" />
+                  Pay by Card – AED 90
                 </Button>
               </a>
             </CardContent>
