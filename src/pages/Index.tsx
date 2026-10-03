@@ -675,6 +675,42 @@ function Trust() {
   );
 }
 
+// ── Intro Video ───────────────────────────────────────────────────────────────
+import introVideoAsset from "@/assets/intro-video.mp4.asset.json";
+
+function IntroVideo() {
+  return (
+    <section
+      className="py-16 md:py-20 px-4 sm:px-6"
+      style={{ background: "hsl(var(--brand-cream))" }}
+    >
+      <div className="max-w-4xl mx-auto text-center">
+        <h2
+          className="text-3xl md:text-4xl font-black mb-3"
+          style={{ fontFamily: "Nunito, sans-serif", color: "hsl(var(--brand-navy))" }}
+        >
+          A Look Inside Creative Minds
+        </h2>
+        <p className="text-muted-foreground max-w-md mx-auto mb-10">
+          A short glimpse of the structured, friendly learning inside the FS2 School Readiness Pack.
+        </p>
+        <div
+          className="rounded-2xl overflow-hidden shadow-lg mx-auto"
+          style={{ border: "1px solid hsl(var(--brand-teal) / 0.15)", maxWidth: "960px" }}
+        >
+          <video
+            src={introVideoAsset.url}
+            className="w-full aspect-video"
+            controls
+            playsInline
+            preload="metadata"
+          />
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // ── How to Use ────────────────────────────────────────────────────────────────
 const steps = [
   { num: "01", label: "Choose one book", desc: "Start with whichever subject your child needs most, or rotate daily." },
@@ -1130,6 +1166,7 @@ const Index = () => {
         <Problem />
         <Books />
         <Trust />
+        <IntroVideo />
         <HowToUse />
         <WhyDifferent />
         <Pricing />
