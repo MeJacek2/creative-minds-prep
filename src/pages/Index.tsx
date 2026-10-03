@@ -703,7 +703,7 @@ function IntroVideo() {
             className="w-full aspect-video"
             controls
             playsInline
-            preload="metadata"
+            preload="auto"
           />
         </div>
       </div>
